@@ -6,6 +6,10 @@
            loopAx from @DJ_Dave: https://strudel.cc/?mTeJt_ICoPrw
 */
 
+samples({
+  build_vox: 'samples/vox/vox_0.wav'
+}, 'https://raw.githubusercontent.com/scarnecchia/music/main/');
+
 const loopAx = register('loopAx', 
   (l, pat) => pat.loopAt(l).chop(l*8).legato(1).mul(speed(0.99))
 );
@@ -24,11 +28,21 @@ let rythymn = stack(
     [1, "<4!, [5/1]>"]
   ).n().s("gm_electric_guitar_clean").loopAx(2))
 
-let prog_1 = n("[F, A, C] [D, F, A] [Bb, D, F]*2 [C, E, G]")
+let prog_1 = //stack(
+  n("[F, A, C] [D, F, A] [Bb, D, F]*2 [C, E, G]")
   .scale("F:major")
   .sustain(1).room(.5).size(4)
   .s("supersaw, gm_electric_guitar_clean")
   .lpf(800)
+  /* n("0").s("vox").bank("build")
+  .chop(4)
+  .rev()
+  .sustain(1)
+  .room(.5)
+  .size(4)
+  //.loopAx(8)
+  .gain(1.1) )*/
+                  
 
 let prog_2 = stack(
   n("[F, A, C]*4")
@@ -82,7 +96,6 @@ let prog_5 = stack(
   .lpf(1300)
 )
 
-
 stack(rythymn, 
       arrange([8, prog_1],
               [2, arrange([1, prog_2],
@@ -94,5 +107,5 @@ stack(rythymn,
               [1, prog_3],
               [1, silence]
              )
-     ).scope()
+     )
 
